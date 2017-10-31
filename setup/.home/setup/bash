@@ -5,3 +5,4 @@
 #
 
 source ~/.home/bash/.bash-colors
+source ~/.home/bash/.bash_git
