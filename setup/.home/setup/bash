@@ -4,3 +4,4 @@
 # * Copy content in ~/.bashrc
 #
 
+source ~/.home/bash/.bash-colors
