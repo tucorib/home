@@ -1,0 +1,36 @@
+#!/bin/bash
+
+########################################################################
+# Inspired by Matthew's Git Bash Prompt
+########################################################################
+
+function parse_git_branch {
+  git rev-parse --git-dir &> /dev/null
+  git_status="$(git status 2> /dev/null)"
+  branch_pattern="^# On branch ([^${IFS}]*)"
+  remote_pattern="# Your branch is (.*) '"
+  diverge_pattern="# Your branch and (.*) have diverged"
+  
+  if [[ ! ${git_status}} =~ "working directory clean" ]]; then
+    state="${COLOR_FG_RED}⚡"
+  fi
+  # add an else if or two here if you want to get more specific
+  if [[ ${git_status} =~ ${remote_pattern} ]]; then
+    if [[ ${BASH_REMATCH[1]} == "ahead of" ]]; then
+      remote="${COLOR_FG_YELLOW}↑"
+    else
+      remote="${COLOR_FG_YELLOW}↓"
+    fi
+  fi
+  if [[ ${git_status} =~ ${diverge_pattern} ]]; then
+    remote="${COLOR_FG_YELLOW}↕"
+  fi
+  if [[ ${git_status} =~ ${branch_pattern} ]]; then
+    branch=${BASH_REMATCH[1]}
+    echo " (${branch})${remote}${state}"
+  fi
+}
+
+function git_dirty_flag {
+  git status 2> /dev/null | grep -c : | awk '{if ($1 > 0) print "⚡"}'
+}
