@@ -6,3 +6,4 @@
 
 source ~/.home/bash/.bash-colors
 source ~/.home/bash/.bash_git
+source ~/.home/bash/.bash_prompt
