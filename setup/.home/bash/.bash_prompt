@@ -1,7 +1,7 @@
 # User@Host:Directory
 PS1="${COLOR_FG_GREEN}\u@\h${COLOR_FG_DEFAULT}:${COLOR_FG_BLUE}\w"
 # Git
-PS1="${PS1}${COLOR_FG_DEFAULT} $(__git_ps1)"
+PS1="${PS1}${COLOR_FG_DEFAULT} ${COLOR_FG_YELLOW}\$(getGitPrompt)"
 
 # New line
 PS1="${PS1}${COLOR_FG_DEFAULT}\n$ "
