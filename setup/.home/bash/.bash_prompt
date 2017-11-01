@@ -13,4 +13,4 @@ PS1="${PS1}\e[0m"
 # Set defalt color
 PS1="${PS1}${COLOR_FG_DEFAULT}"
 # New line
-PS1="${PS1}\n$ "
+PS1="${PS1}\n\$ "
