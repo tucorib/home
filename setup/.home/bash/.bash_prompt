@@ -1,7 +1,16 @@
-# User@Host:Directory
-PS1="\e[1m${COLOR_FG_GREEN}\u@\h${COLOR_FG_DEFAULT}:${COLOR_FG_BLUE}\w"
-# Git
-PS1="${PS1}${COLOR_FG_DEFAULT} ${COLOR_FG_YELLOW}\$(getGitPrompt)"
+# Set prompt in bold
+PS1="\e[1m"
 
+# Hour
+PS1="${PS1}${COLOR_FG_YELLOW}\t"
+# User@Host:Directory
+PS1="${PS1} ${COLOR_FG_GREEN}\u@\h${COLOR_FG_DEFAULT}:${COLOR_FG_BLUE}\w"
+# Git
+PS1="${PS1} ${COLOR_FG_ORANGE}\$(getGitPrompt)"
+
+# Unset bold
+PS1="${PS1}\e[0m"
+# Set defalt color
+PS1="${PS1}${COLOR_FG_DEFAULT}"
 # New line
-PS1="${PS1}\e[0m${COLOR_FG_DEFAULT}\n$ "
+PS1="${PS1}\n$ "
