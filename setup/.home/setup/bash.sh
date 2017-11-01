@@ -26,12 +26,13 @@ function post {
 }
 
 function bash_colors {
+	bashrc_line="source ${SETUP_PATH}/bash/.bash_colors"
 	if [ $HOME_COMMAND = "install" ]; then
 		# Copy file
 		cp "./.home/bash/.bash_colors" "$EVAL_SETUP_PATH/bash/"
 		# Add source in ~/.bashrc
-		if [ $(cat ~/.bashrc | grep "^source ${SETUP_PATH}/bash/.bash_colors$" | wc -l) == 0 ]; then
-			echo "source ${SETUP_PATH}/bash/.bash_colors" >> ~/.bashrc
+		if [ $(cat ~/.bashrc | grep "^${bashrc_line}$" | wc -l) == 0 ]; then
+			echo "${bashrc_line}" >> ~/.bashrc
 		fi
 	elif [ $HOME_COMMAND = "uninstall" ]; then
 		# Delete file
@@ -39,35 +40,43 @@ function bash_colors {
 			rm "$EVAL_SETUP_PATH/bash/.bash_colors"
 		fi
 		# Remove source in ~/.bashrc
-		sed -i "\#${SETUP_PATH}/bash/.bash_colors#d" ~/.bashrc
+		sed -i "\#${bashrc_line}#d" ~/.bashrc
 	fi
 }
 
 function bash_git {
+	bashrc_line="source ${SETUP_PATH}/bash/.bash_git ${SETUP_PATH}"
 	if [ $HOME_COMMAND = "install" ]; then
+		# Get git-prompt.sh
+		wget -q -O "$EVAL_SETUP_PATH/bash/git-prompt.sh" "https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh"
 		# Copy file
 		cp "./.home/bash/.bash_git" "$EVAL_SETUP_PATH/bash/"
 		# Add source in ~/.bashrc
-		if [ $(cat ~/.bashrc | grep "^source ${SETUP_PATH}/bash/.bash_git$" | wc -l) == 0 ]; then
-			echo "source ${SETUP_PATH}/bash/.bash_git" >> ~/.bashrc
+		if [ $(cat ~/.bashrc | grep "^${bashrc_line}$" | wc -l) == 0 ]; then
+			echo "${bashrc_line}" >> ~/.bashrc
 		fi
 	elif [ $HOME_COMMAND = "uninstall" ]; then
+		# Delete git-prompt.sh
+		if [ -f "$EVAL_SETUP_PATH/bash/git-prompt.sh" ]; then
+			rm "$EVAL_SETUP_PATH/bash/git-prompt.sh"
+		fi
 		# Delete file
 		if [ -f "$EVAL_SETUP_PATH/bash/.bash_git" ]; then
 			rm "$EVAL_SETUP_PATH/bash/.bash_git"
 		fi
 		# Remove source in ~/.bashrc
-		sed -i "\#${SETUP_PATH}/bash/.bash_git#d" ~/.bashrc
+		sed -i "\#${bashrc_line}#d" ~/.bashrc
 	fi
 }
 
 function bash_prompt {
+	bashrc_line="source ${SETUP_PATH}/bash/.bash_prompt"
 	if [ $HOME_COMMAND = "install" ]; then
 		# Copy file
 		cp "./.home/bash/.bash_prompt" "$EVAL_SETUP_PATH/bash/"
 		# Add source in ~/.bashrc
-		if [ $(cat ~/.bashrc | grep "^source ${SETUP_PATH}/bash/.bash_prompt$" | wc -l) == 0 ]; then
-			echo "source ${SETUP_PATH}/bash/.bash_prompt" >> ~/.bashrc
+		if [ $(cat ~/.bashrc | grep "^${bashrc_line}$" | wc -l) == 0 ]; then
+			echo "${bashrc_line}" >> ~/.bashrc
 		fi
 	elif [ $HOME_COMMAND = "uninstall" ]; then
 		# Delete file
@@ -75,7 +84,7 @@ function bash_prompt {
 			rm "$EVAL_SETUP_PATH/bash/.bash_prompt"
 		fi
 		# Remove source in ~/.bashrc
-		sed -i "\#${SETUP_PATH}/bash/.bash_prompt#d" ~/.bashrc
+		sed -i "\#${bashrc_line}#d" ~/.bashrc
 	fi
 }
 
