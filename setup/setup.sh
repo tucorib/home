@@ -19,6 +19,7 @@ if [ $HOME_COMMAND = "install" ]; then
 fi
 
 ./.home/setup/bash.sh "$HOME_COMMAND" "$SETUP_PATH"
+./.home/setup/git.sh "$HOME_COMMAND" "$SETUP_PATH"
 
 if [ $HOME_COMMAND = "uninstall" ]; then
 	eval EVAL_SETUP_PATH=$SETUP_PATH
