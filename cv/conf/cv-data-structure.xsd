@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/cv-content" xmlns:tns="http://www.example.org/cv-content" elementFormDefault="qualified">
+
+    <element name="cv" type="tns:cv"></element>
+
+    <element name="person" type="tns:person"></element>
+
+
+    <complexType name="person">
+    	<sequence>
+    		<element ref="tns:email" minOccurs="1"
+    			maxOccurs="unbounded">
+    		</element>
+    		<element ref="tns:phone" minOccurs="1"
+    			maxOccurs="unbounded">
+    		</element>
+    	</sequence>
+    	<attribute name="firstname">
+    		<simpleType>
+    			<restriction base="string">
+    				<pattern value="[A-Z].*"></pattern>
+    			</restriction>
+    		</simpleType>
+    	</attribute>
+    	<attribute name="lastname">
+    		<simpleType>
+    			<restriction base="string">
+    				<pattern value="[A-Z].*"></pattern>
+    			</restriction>
+    		</simpleType>
+    	</attribute>
+    </complexType>
+
+    <complexType name="cv">
+    	<sequence>
+    		<element ref="tns:person"></element>
+    	</sequence>
+    </complexType>
+    
+    <element name="email">
+    	<simpleType>
+    		<restriction base="string">
+    			<pattern value=".+@.+\..+"></pattern>
+    		</restriction>
+    	</simpleType>
+    </element>
+    
+    <element name="phone">
+    	<simpleType>
+    		<restriction base="string">
+    			<pattern value="(\+[0-9]+ )+ [0-9\s]+"></pattern>
+    		</restriction>
+    	</simpleType>
+    </element>
+
+    <element name="experience" type="tns:experience"></element>
+
+    <complexType name="experience">
+    	<attribute name="start" type="date" use="required"></attribute>
+    	<attribute name="end" type="date" use="optional"></attribute>
+    	<attribute name="place" type="string" use="optional"></attribute>
+    </complexType>
+
+    <element name="firm" type="tns:firm"></element>
+
+    <complexType name="firm"></complexType>
+</schema>
